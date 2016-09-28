@@ -15,11 +15,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipPercentage: UILabel!
     @IBOutlet var rightSwipe: UISwipeGestureRecognizer!
     @IBOutlet var leftSwipe: UISwipeGestureRecognizer!
+    var percentage: Int = 0;
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        configureGestureRecognizers()
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +28,26 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    fileprivate func configureGestureRecognizers() {
+        rightSwipe.addTarget(self, action: #selector(changePercentage))
+        leftSwipe.addTarget(self, action: Selector("changePercentage:"))
+    
+    }
+    
+     func changePercentage(sender: UISwipeGestureRecognizer) {
+        switch sender.direction {
+        case UISwipeGestureRecognizerDirection.right:
+            percentage += 1
+            break
+        case UISwipeGestureRecognizerDirection.left:
+            percentage -= 1
+            break
+        default:
+            break
+        }
+        tipPercentage.text = String(percentage)
+    }
 
 }
 
