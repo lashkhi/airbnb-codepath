@@ -46,8 +46,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0R-gZ-jDB">
-                                <frame key="frameInset" minX="175" minY="223" width="24" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0R-gZ-jDB">
+                                <frame key="frameInset" minX="168" minY="223" width="40" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -64,21 +64,22 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="Qw2-WL-P1M" appends="YES" id="for-5y-0tT"/>
-                            <outletCollection property="gestureRecognizers" destination="eoZ-85-NWo" appends="YES" id="xkx-ZB-RfI"/>
+                            <outletCollection property="gestureRecognizers" destination="21S-n6-yZw" appends="YES" id="ZUs-13-Ulb"/>
                         </connections>
                     </view>
                     <connections>
                         <outlet property="amount" destination="gaX-cQ-GPf" id="DHW-mM-UCp"/>
-                        <outlet property="leftSwipe" destination="eoZ-85-NWo" id="sfZ-ox-5DS"/>
-                        <outlet property="rightSwipe" destination="Qw2-WL-P1M" id="dWu-Uv-Mrb"/>
+                        <outlet property="panGestureRecognizer" destination="21S-n6-yZw" id="Lnu-HS-zcN"/>
                         <outlet property="tipPercentage" destination="i0R-gZ-jDB" id="ecF-cO-jB7"/>
                         <outlet property="totalSum" destination="6CT-w1-bak" id="1bY-5i-XWo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="Qw2-WL-P1M"/>
-                <swipeGestureRecognizer direction="left" id="eoZ-85-NWo"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="21S-n6-yZw">
+                    <connections>
+                        <action selector="handlePan:" destination="BYZ-38-t0r" id="kmv-DE-lUi"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
