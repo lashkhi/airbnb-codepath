@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var amount: UITextField!
     @IBOutlet weak var totalSum: UILabel!
     @IBOutlet weak var tipPercentage: UILabel!
@@ -24,6 +25,11 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        amount.becomeFirstResponder()
     }
     @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
         view.endEditing(true)
@@ -44,10 +50,46 @@ class ViewController: UIViewController {
             let sumWithTips = Double(amount.text!)! * percentageToMultiply
             tipPercentage.text = String(percentage) + "%"
             totalSum.text = String(format: "%.f$", sumWithTips)
+            totalSum.alpha = 1
+            changeEmojiForTipValue(tip: percentage)
         } else {
-            totalSum.text = "0"
+            totalSum.alpha = 0
         }
         
     }
+    
+    func changeEmojiForTipValue(tip: Int) {
+        if (emojiLabel.alpha == 0) {
+            UIView.animate(withDuration: 1.0, animations: {
+                self.emojiLabel.alpha = 1
+            })
+        }
+        
+        switch tip {
+        case 0..<10:
+            emojiLabel.text = "😡"
+        case 10..<20:
+            emojiLabel.text = "😐"
+        case 20..<30:
+            emojiLabel.text = "🙂"
+        case 30..<40:
+            emojiLabel.text = "☺️"
+        case 40..<50:
+            emojiLabel.text = "😌"
+        case 50..<60:
+            emojiLabel.text = "😘"
+        case 60..<70:
+            emojiLabel.text = "😍"
+        case 70..<80:
+            emojiLabel.text = "😻"
+        case 80..<90:
+            emojiLabel.text = "😻😍"
+        case 90..<101:
+            emojiLabel.text = "😻😍❤️"
+        default:
+            emojiLabel.alpha = 0
+        }
+    }
+    
 }
 
