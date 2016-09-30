@@ -26,29 +26,28 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
-        let translation = sender.translation(in: self.view)
-        var startValue = 0
-        switch sender.state {
-        case .began:
-            startValue = Int(translation.x)
-            break
-        case .ended:
-            
-        default:
-            <#code#>
-        }
-        if sender.state == .began {
-            startValue = Int(translation.x)
-        }
-        
-        if percentage >= 0 {
-            percentage = startValue + Int(translation.x/100)
-            print(translation)
-            tipPercentage.text = String(percentage)
+        view.endEditing(true)
+        let velocity = sender.velocity(in: view)
+        if sender.state == .changed {
+            changeTipValue(tip:Int(velocity.x/100))
         }
     }
-
-
-
+    
+    func changeTipValue(tip: Int) {
+        percentage = min(100, percentage + tip)
+        var percentageToMultiply = Double(percentage + 100)/100
+        if percentage < 0 {
+            percentage = 0
+            percentageToMultiply = 1
+        }
+        if ((amount.text?.characters.count) != 0) {
+            let sumWithTips = Double(amount.text!)! * percentageToMultiply
+            tipPercentage.text = String(percentage) + "%"
+            totalSum.text = String(format: "%.f$", sumWithTips)
+        } else {
+            totalSum.text = "0"
+        }
+        
+    }
 }
 
